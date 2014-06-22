@@ -4,7 +4,8 @@ require "net/http"
 filename = ARGV[0]
 
 if filename.nil?
-  puts 'Usage: sub your_media_file_name'
+  puts 'Usage: sub your_media_file_name [-r]'
+  puts '-r starts VLC after downloading subtitles'
   abort
 end
 
@@ -47,3 +48,7 @@ new_filename = new_filename.join('.')
 
 `mv #{filename} #{new_filename}`
 `rm #{zipped_file}`
+
+if ARGV[1] == '-r'
+  `vlc #{ARGV[0]}`
+end

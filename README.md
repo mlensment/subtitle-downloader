@@ -5,6 +5,8 @@ Tired of finding subtitles online? This script does it automatically.
 ## Setup
 * Install ruby (tested on 2.1.1)
 * `sudo wget https://raw.githubusercontent.com/mlensment/subtitle-downloader/master/sub -P /usr/local/bin && sudo chmod +x /usr/local/bin/sub`
+* To upgrade to the newest version:
+* `sudo rm /usr/local/bin/sub && sudo wget https://raw.githubusercontent.com/mlensment/subtitle-downloader/master/sub -P /usr/local/bin && sudo chmod +x /usr/local/bin/sub`
 
 ## Usage
 * Download your favourite show (legally).
@@ -12,6 +14,9 @@ Tired of finding subtitles online? This script does it automatically.
 * `sub The.Big.Bang.Theory.S07E24.HDTV.x264-LOL.mp4`
 * `vlc The.Big.Bang.Theory.S07E24.HDTV.x264-LOL.mp4`
 * Enjoy!
+
+Optionally you can run `sub The.Big.Bang.Theory.S07E24.HDTV.x264-LOL.mp4 -r`  
+This starts VLC player automatically, but does not detach from terminal.
 
 ## Under the hood
 * This script goes to www.podnapisi.net, finds subtitles for your specified media file.  
