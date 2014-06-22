@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+require "net/http"
+
+filename = ARGV[0]
+uri = URI("http://www.podnapisi.net/en/ppodnapisi/search/sK/#{filename}/sS/downloads/sO/desc")
+
+matches = /<tr class=" ">.*<a class="subtitle_page_link" href="([^"]*)">.*English subtitles/.match(Net::HTTP.get(uri))
+
+if matches.nil?
+  puts "No subtitle found, for debugging, visit #{uri.to_s}"
+  abort
+end
+
+download_page_path = matches[1]
+
+uri = URI("http://www.podnapisi.net/#{download_page_path}")
+
+matches = /<a rel="nofollow" class="button big download" href="([^"]*)".*>Download subtitle</.match(Net::HTTP.get(uri))
+
+if matches.nil?
+  puts "No download button found, for debugging, visit #{uri.to_s}"
+  abort
+end
+
+`wget http://www.podnapisi.net#{matches[1]}`
+
+file = matches[1].split('/').last
+zipped_file = "#{file}.zip"
+
+`mv #{file} #{zipped_file}`
+filename = `unzip -Z -1 #{zipped_file}`
+`unzip #{zipped_file}`
+
+filename.gsub!(/ /,"\\ ")
+filename.gsub!("\n", '')
+filename_suffix = filename.split('.').last
+
+new_filename = ARGV[0].split('.')
+new_filename[-1] = filename_suffix
+new_filename = new_filename.join('.')
+
+`mv #{filename} #{new_filename}`
+`rm #{zipped_file}`
