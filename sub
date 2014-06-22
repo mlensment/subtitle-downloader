@@ -2,6 +2,12 @@
 require "net/http"
 
 filename = ARGV[0]
+
+if filename.nil?
+  puts 'Usage: sub your_media_file_name'
+  abort
+end
+
 uri = URI("http://www.podnapisi.net/en/ppodnapisi/search/sK/#{filename}/sS/downloads/sO/desc")
 
 matches = /<tr class=" ">.*<a class="subtitle_page_link" href="([^"]*)">.*English subtitles/.match(Net::HTTP.get(uri))
