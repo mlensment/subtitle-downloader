@@ -16,6 +16,6 @@ Tired of finding subtitles online? This script does it automatically.
 ## Under the hood
 * This script goes to www.podnapisi.net, finds subtitles for your specified media file.  
 * Lists subtitles by download count.  
-* Finds the most downloaded English subtitles (when they are not on the first page, this simple script does not work)  
+* Finds the most downloaded English subtitles (when they are not on the first page, this simple script does not work).  
 * Navigates to the download page.  
 * Downloads subtitles, extracts them and renames them accordingly to the specified media file so they can be picked up by VLC player.
