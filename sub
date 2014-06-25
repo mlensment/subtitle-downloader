@@ -11,7 +11,7 @@ end
 
 uri = URI("http://www.podnapisi.net/en/ppodnapisi/search/sK/#{filename}/sS/downloads/sO/desc")
 
-matches = /<tr class=" ">.*<a class="subtitle_page_link" href="([^"]*)">.*English subtitles/.match(Net::HTTP.get(uri))
+matches = /<tr class=" ">.*<a class="subtitle_page_link" href="([^"]*)">.*English subtitles/m.match(Net::HTTP.get(uri))
 
 if matches.nil?
   puts "No subtitle found, for debugging, visit #{uri.to_s}"
@@ -22,7 +22,7 @@ download_page_path = matches[1]
 
 uri = URI("http://www.podnapisi.net/#{download_page_path}")
 
-matches = /<a rel="nofollow" class="button big download" href="([^"]*)".*>Download subtitle</.match(Net::HTTP.get(uri))
+matches = /<a rel="nofollow" class="button big download" href="([^"]*)".*>Download subtitle</m.match(Net::HTTP.get(uri))
 
 if matches.nil?
   puts "No download button found, for debugging, visit #{uri.to_s}"
