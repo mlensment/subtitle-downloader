@@ -39,7 +39,13 @@ filename = `unzip -Z -1 #{zipped_file}`
 `unzip #{zipped_file}`
 
 filename.gsub!(/ /,"\\ ")
-filename.gsub!("\n", '')
+
+';\'"`#$&*?<>{}'.split('').each do |x|
+  filename.gsub!(/[#{x}]/, "\\\\#{x}")
+end
+
+filename.gsub!("\n", "")
+
 filename_suffix = filename.split('.').last
 
 new_filename = ARGV[0].split('.')
